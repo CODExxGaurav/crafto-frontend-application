@@ -10,11 +10,13 @@ export default function QuotesPage() {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const router = useRouter();
 
   const loadQuotes = async () => {
     try {
+      setLoading(true);
       setError(null);
       const token = localStorage.getItem("authToken");
       if (!token) {
@@ -31,6 +33,8 @@ export default function QuotesPage() {
     } catch (err) {
       console.log("Failed to fetch quotes:", err);
       setError("Failed to fetch quotes. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,22 +45,28 @@ export default function QuotesPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show the "Scroll to Top" button if the user has scrolled down
       if (window.scrollY > 300) {
         setShowScrollToTop(true);
       } else {
         setShowScrollToTop(false);
       }
+
+      if (
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight &&
+        !loading &&
+        hasMore
+      ) {
+        setPage((prev) => prev + 1);
+      }
     };
 
-    // Attach scroll event listener
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [loading, hasMore]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -85,21 +95,13 @@ export default function QuotesPage() {
               />
             ))}
           </div>
-          {hasMore && (
-            <button
-              onClick={() => setPage((prev) => prev + 1)}
-              className="load-more"
-            >
-              Load More
-            </button>
-          )}
+          {loading && <div className="loading">Loading...</div>}
           <button className="fab" onClick={() => router.push("/create-quote")}>
             +
           </button>
         </>
       )}
 
-      {/* Scroll to Top button */}
       {showScrollToTop && (
         <button
           className="scroll-to-top"
