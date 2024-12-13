@@ -6,7 +6,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 350px;
-  max-width: 500px;
+  max-width: 350px;
   margin: 20px auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -52,7 +52,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
     background: #f9f9f9;
     font-size: 0.9rem;
     color: #666;
@@ -71,9 +71,9 @@
     }
   }
 
-  @media (max-width: 768px) {
-    max-width: 90%;
 
+}
+  @media (max-width: 768px) {
     .quote-image {
       height: 120px;
 
@@ -82,21 +82,19 @@
         padding: 8px;
       }
     }
-
-    .quote-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 5px;
+    .quote-card{
+      min-width: 300px;
+      width: 250px;
     }
+
   }
 
   @media (max-width: 480px) {
     .quote-image {
       height: 100px;
     }
-
-    .quote-footer {
-      font-size: 0.8rem;
+    .quote-card{
+      min-width: 200px;
+      width: 250px;
     }
   }
-}

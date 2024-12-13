@@ -1,10 +1,10 @@
 .quotes-page {
-  padding: 20px;
   background-color: #f4f4f4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 
   h1 {
     font-size: 2rem;
@@ -14,7 +14,7 @@
 
   .quote-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
     max-width: 1200px;
@@ -22,8 +22,8 @@
   }
   .scroll-to-top {
     position: fixed;
-    top: 50vh;
-    right: 20px;
+    top: 60vh;
+    right: 24px;
     width: 30px;
     height: 30px;
     align-items: center;
@@ -32,7 +32,7 @@
     font-size: 1.2rem;
     border-radius: 50%;
     padding: 1.2rem;
-
+    z-index: 100;
     cursor: pointer;
   }
   .loading {
@@ -115,12 +115,26 @@
     background-color: #1a2e47;
     transform: scale(1);
   }
-
+  @media (max-width: 1240px){
+    .quote-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   @media (max-width: 768px) {
     .fab {
       width: 50px;
       height: 50px;
       font-size: 1.2rem;
     }
+    .scroll-to-top{
+      top: auto;
+      bottom: 100px;
+
+    }
+    .quote-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
   }
+
 }
