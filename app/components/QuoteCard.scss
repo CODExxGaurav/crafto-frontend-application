@@ -1,0 +1,102 @@
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-width: 350px;
+  max-width: 500px;
+  margin: 20px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .quote-image {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+
+    .image-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .quote-text {
+      position: relative;
+      height: inherit;
+      z-index: 1;
+      padding: 20px;
+      font-size: 1rem;
+      color: #fff;
+      text-align: center;
+      line-height: 1.4;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f9f9f9;
+    font-size: 0.9rem;
+    color: #666;
+
+    .username {
+      font-weight: bold;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 150px;
+      cursor: pointer;
+    }
+    .timestamp {
+      font-size: 0.8rem;
+      color: #999;
+    }
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+
+    .quote-image {
+      height: 120px;
+
+      .quote-text {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+    }
+
+    .quote-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .quote-image {
+      height: 100px;
+    }
+
+    .quote-footer {
+      font-size: 0.8rem;
+    }
+  }
+}
