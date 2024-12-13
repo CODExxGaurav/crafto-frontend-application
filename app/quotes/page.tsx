@@ -10,6 +10,7 @@ export default function QuotesPage() {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const router = useRouter();
 
   const loadQuotes = async () => {
@@ -37,6 +38,29 @@ export default function QuotesPage() {
     loadQuotes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show the "Scroll to Top" button if the user has scrolled down
+      if (window.scrollY > 300) {
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    // Attach scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="quotes-page">
@@ -73,6 +97,17 @@ export default function QuotesPage() {
             +
           </button>
         </>
+      )}
+
+      {/* Scroll to Top button */}
+      {showScrollToTop && (
+        <button
+          className="scroll-to-top"
+          onClick={scrollToTop}
+          title="Scroll to top"
+        >
+          ↑
+        </button>
       )}
     </div>
   );
