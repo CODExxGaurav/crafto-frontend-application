@@ -35,12 +35,7 @@ export default function CreateQuotePage() {
           {...register("text")}
           required
         />
-        <input
-          type="file"
-          accept="image/jpeg, image/jpg, image/png"
-          {...register("image")}
-          required
-        />
+        <input type="file" accept="image/jpeg, image/jpg, image/png" required />
         <button type="submit">Submit</button>
       </form>
     </div>
